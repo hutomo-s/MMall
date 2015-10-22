@@ -55,16 +55,19 @@ class Cart(models.Model):
     customer_address = models.CharField(max_length=255)
     shipping_address = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
-    total = models.IntegerField()
-    payment_date = models.DateTimeField(blank=True)
+    total = models.IntegerField(default=0)
+    payment_date = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
     status = enum.EnumField(CartStatus, default=CartStatus.CREATED)
 
-    # def __str__(self):
-    #     return self.id + ' ' + self.brand.name
+    def __str__(self):
+         return 'Order ID: %d' %(self.id)
 
 class CartItem(models.Model):
-    cart_id = models.ForeignKey('Cart')
-    quantity = models.IntegerField()
-    product_id = models.ForeignKey('Product')
-    base_price = models.DecimalField(max_digits=10, decimal_places=2)
-    tax = models.DecimalField(max_digits=10, decimal_places=2)
+    cart_id = models.ForeignKey(Cart)
+    quantity = models.IntegerField(default=0)
+    product = models.ForeignKey(Product)
+    base_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    tax = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def __str__(self):
+        return self.product.title
