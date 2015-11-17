@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Ecommerce</title>
+</head>
+<body>
+
+<h2>
+    Index Product
+</h2>
+
+<table>
+<tr>
+    <td>Nama</td>
+    <td>Kategori</td>
+    <td>Gambar</td>
+    <td>Detail</td>
+</tr>
+{% for p in product_list %}
+<tr>
+    <td>{{ p.title|upper }}</td>
+    <td>{{ p.category }}</td>
+    <td>{{ p.picture }}></td>
+    <td><a href="{% url "ecommerce.views.detail" p.id %}">Detail</a></td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>
