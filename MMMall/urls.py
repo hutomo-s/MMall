@@ -22,6 +22,10 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-        'document_root': settings.MEDIA_ROOT}),
+        'document_root': settings.MEDIA_ROOT
+        }),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
+                'document_root': settings.STATIC_ROOT,
+        }),
     url(r'^store/', include('ecommerce.urls')),
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
